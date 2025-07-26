@@ -230,5 +230,5 @@ export const vapiAgentConfig = {
   serverUrl: process.env.NEXT_PUBLIC_BASE_URL + "/api/vapi",
   endCallFunctionEnabled: true,
   endCallMessage: "Thank you for your time today. The interview has been completed successfully. You should hear back from our team within the next few business days. Have a great day!",
-  maxDurationSeconds: 1800 // 30 minutes
+  maxDurationSeconds: 360 // 6 minutes
 };

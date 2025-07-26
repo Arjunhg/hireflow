@@ -61,7 +61,7 @@ export const createAssistant = async (name: string) => {
       },
       endCallFunctionEnabled: true,
       endCallMessage: "Thank you for your time today. The interview has been completed successfully. You should hear back from our team within the next few business days. Have a great day!",
-      maxDurationSeconds: 1800, // 30 minutes
+      maxDurationSeconds: 360, // 6 minutes for a typical interview
       serverMessages: [],
     })
 
@@ -130,7 +130,7 @@ export const updateAssistant = async (
       },
       endCallFunctionEnabled: true,
       endCallMessage: "Thank you for your time today. The interview has been completed successfully. You should hear back from our team within the next few business days. Have a great day!",
-      maxDurationSeconds: 1800,
+      maxDurationSeconds: 360,
       serverMessages: [],
     })
     console.log('Assistant updated:', updateAssistant)

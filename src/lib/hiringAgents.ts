@@ -64,7 +64,7 @@ export const createHiringAgent = async (config: HiringAgentConfig) => {
       },
       endCallFunctionEnabled: true,
       endCallMessage: `Thank you for your time today. Your ${config.role || 'technical'} interview has been completed successfully. You should hear back from our team within the next few business days. Have a great day!`,
-      maxDurationSeconds: 1800,
+      maxDurationSeconds: 360, 
       serverMessages: [],
     })
 
