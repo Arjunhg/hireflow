@@ -19,7 +19,7 @@ import { changeWebinarStatus } from '@/actions/webinar'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import ObsDialogBox from './ObsDialogBox'
-import { LiveTranscription } from '@/components/ui/LiveTranscription'
+import { SharedLiveTranscription } from '@/components/ui/SharedLiveTranscription'
 
 type Props = {
   showChat: boolean
@@ -305,8 +305,12 @@ const LiveWebinarView = ({
           {/* Transcription panel - desktop */}
           {showTranscription && (
             <div className="w-64 xl:w-80 min-w-0">
-              <LiveTranscription 
+              <SharedLiveTranscription 
                 className="h-full"
+                isHost={isHost}
+                channel={channel}
+                hostId={webinar.presenterId}
+                hostName={webinar.presenter.name}
                 onTranscriptUpdate={(transcript) => {
                   console.log('Transcript updated:', transcript)
                 }}
@@ -419,8 +423,12 @@ const LiveWebinarView = ({
           {/* Transcription panel - mobile */}
           {showTranscription && (
             <div className="h-48 sm:h-64 m-2 mt-1">
-              <LiveTranscription 
+              <SharedLiveTranscription 
                 className="h-full"
+                isHost={isHost}
+                channel={channel}
+                hostId={webinar.presenterId}
+                hostName={webinar.presenter.name}
                 showCloseButton={true}
                 onClose={() => setShowTranscription(false)}
                 onTranscriptUpdate={(transcript) => {
