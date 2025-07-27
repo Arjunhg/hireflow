@@ -22,6 +22,11 @@ export function useAssemblyAITranscription(options: UseAssemblyAITranscriptionOp
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
   const audioChunksRef = useRef<Blob[]>([])
+  
+  // Use refs to track processing state and user intent
+  const isProcessingRef = useRef(false)
+  const userStoppedRef = useRef(false)
+
 
   const startRecording = useCallback(async () => {
     try {
@@ -66,7 +71,16 @@ export function useAssemblyAITranscription(options: UseAssemblyAITranscriptionOp
 
       transcriber.on('close', (code: number, reason: string) => {
         console.log('AssemblyAI connection closed:', code, reason);
-        isProcessing = false
+        
+        // Only stop processing if the user actually requested it
+        if (userStoppedRef.current) {
+          console.log('User initiated stop → cleaning up audio.')
+          isProcessingRef.current = false
+        } else {
+          console.warn('Server closed the socket; continuing to record…')
+          // Don't stop processing - let the user manually restart if needed
+          setError(new Error(`Connection lost: ${reason}. Recording continues...`))
+        }
       })
 
       // Set up audio context for PCM16 capture
@@ -88,53 +102,82 @@ export function useAssemblyAITranscription(options: UseAssemblyAITranscriptionOp
       source.connect(analyser)
       
       // Create a controlled audio processing loop
-      let isProcessing = true
       let lastSendTime = 0
       const SEND_INTERVAL = 50 // Send every 50ms
       
       const processAudio = () => {
-        if (!isProcessing) return
-        
-        const now = Date.now()
-        if (now - lastSendTime >= SEND_INTERVAL) {
-          analyser.getByteTimeDomainData(dataArray)
-          
-          // Convert to PCM16
-          const pcmData = new Int16Array(bufferLength)
-          for (let i = 0; i < bufferLength; i++) {
-            const sample = (dataArray[i] - 128) / 128
-            pcmData[i] = Math.max(-32768, Math.min(32767, sample * 32768))
-          }
-          
-          // Send to AssemblyAI
-          try {
-            transcriber.sendAudio(new Uint8Array(pcmData.buffer))
-            lastSendTime = now
-          } catch (error) {
-            console.error('Error sending audio to AssemblyAI:', error)
-            isProcessing = false
-          }
+        if (!isProcessingRef.current) {
+          console.log('Audio processing stopped - isProcessingRef set to false')
+          return
         }
         
-        // Continue processing
-        if (isProcessing) {
-          setTimeout(processAudio, 10) // Check every 10ms
+        try {
+          const now = Date.now()
+          if (now - lastSendTime >= SEND_INTERVAL) {
+            // Check if audio context is suspended and resume if needed
+            if (audioContext.state === 'suspended') {
+              console.log('Audio context suspended, resuming...')
+              audioContext.resume()
+            }
+            
+            analyser.getByteTimeDomainData(dataArray)
+            
+            // Convert to PCM16
+            const pcmData = new Int16Array(bufferLength)
+            for (let i = 0; i < bufferLength; i++) {
+              const sample = (dataArray[i] - 128) / 128
+              pcmData[i] = Math.max(-32768, Math.min(32767, sample * 32768))
+            }
+            
+            // Send to AssemblyAI
+            try {
+              transcriber.sendAudio(new Uint8Array(pcmData.buffer))
+              lastSendTime = now
+            } catch (error) {
+              console.error('Error sending audio to AssemblyAI:', error)
+              // Don't stop processing on send errors - just skip this chunk
+            }
+          }
+          
+          // Continue processing
+          if (isProcessingRef.current) {
+            setTimeout(processAudio, 10) // Check every 10ms
+          } else {
+            console.log('Audio processing stopped - isProcessingRef set to false')
+          }
+        } catch (globalError) {
+          console.error('Critical error in audio processing:', globalError)
+          const errorMessage = globalError instanceof Error ? globalError.message : String(globalError)
+          setError(new Error(`Audio processing error: ${errorMessage}`))
+          // Continue processing even on errors to maintain stability
+          if (isProcessingRef.current) {
+            setTimeout(processAudio, 100) // Slower retry on errors
+          }
         }
       }
       
       // Start processing
+      isProcessingRef.current = true
+      userStoppedRef.current = false
       processAudio()
       
       // Store references for cleanup
-      mediaRecorderRef.current = { 
+      mediaRecorderRef.current = {
         stop: () => {
-          console.log('Stopping audio processing...')
-          isProcessing = false
-          source.disconnect()
-          analyser.disconnect()
-          audioContext.close()
+          console.log(
+            '%c[mediaRecorderRef.stop] called — userStoppedRef=%s',
+            'color: orange; font-weight: bold;',
+            userStoppedRef.current
+          );
+          console.trace();    // <— this will show you exactly what called it
+          userStoppedRef.current = true;
+          isProcessingRef.current = false;
+          source.disconnect();
+          analyser.disconnect();
+          audioContext.close();
         }
-      } as any
+      } as any;
+      
       
       // Set up periodic check to keep audio context active
       const audioContextCheckInterval = setInterval(() => {
@@ -201,25 +244,35 @@ export function useAssemblyAITranscription(options: UseAssemblyAITranscriptionOp
 
   // Auto-start if requested
   useEffect(() => {
-    if (options.autoStart) {
-      startRecording()
-    }
+    if (!options.autoStart) return;
+  
+    // defer to next tick—beyond StrictMode’s double‑mount
+    const id = setTimeout(() => startRecording(), 0);
+    return () => clearTimeout(id);
+  }, [options.autoStart, startRecording]);
+  
 
-    return () => {
-      if (isRecording) {
-        stopRecording()
-      }
-    }
-  }, [options.autoStart, startRecording, stopRecording, isRecording])
-
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if (isRecording) {
-        stopRecording()
+      // Direct cleanup without calling stopRecording
+      if (isProcessingRef.current) {
+        isProcessingRef.current = false;
+        userStoppedRef.current = true;
+      }
+      // Clean up streams
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
       }
     }
-  }, [isRecording, stopRecording])
+  }, []) // Empty dependency array
+
+  useEffect(() => {
+    console.log('Mounted useAssemblyAITranscription')
+    return () => {
+      console.log('Unmounted useAssemblyAITranscription')
+    }
+  }, [])
+  
 
   return {
     isRecording,
