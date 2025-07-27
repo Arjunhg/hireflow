@@ -38,14 +38,18 @@ export function LiveTranscription({ className, onTranscriptUpdate, onClose, show
     }
   })
 
+  const getFinalizedTranscript = () =>
+    transcripts.filter(t => !t.isPartial).map(t => t.text).join(' ')
+
   const handleToggleRecording = async () => {
     if (isRecording) {
       await stopRecording()
-      // Save the current transcript when stopping
-      const fullTranscript = getFullTranscript()
-      if (fullTranscript) {
-        setSavedTranscripts(prev => prev + (prev ? '\n\n' : '') + fullTranscript)
+      // Save only finalized (green) transcripts when stopping
+      const finalizedTranscript = getFinalizedTranscript()
+      if (finalizedTranscript) {
+        setSavedTranscripts(prev => prev + (prev ? '\n\n' : '') + finalizedTranscript)
       }
+      clearTranscripts() 
     } else {
       await startRecording()
     }
@@ -57,7 +61,7 @@ export function LiveTranscription({ className, onTranscriptUpdate, onClose, show
   }
 
   const handleDownloadTranscript = () => {
-    const fullTranscript = savedTranscripts + (savedTranscripts ? '\n\n' : '') + getFullTranscript()
+    const fullTranscript = savedTranscripts + (savedTranscripts ? '\n\n' : '') + getFinalizedTranscript()
     const blob = new Blob([fullTranscript], { type: 'text/plain' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
@@ -70,7 +74,7 @@ export function LiveTranscription({ className, onTranscriptUpdate, onClose, show
   }
 
   const handleCopyTranscript = async () => {
-    const fullTranscript = savedTranscripts + (savedTranscripts ? '\n\n' : '') + getFullTranscript()
+    const fullTranscript = savedTranscripts + (savedTranscripts ? '\n\n' : '') + getFinalizedTranscript()
     try {
       await navigator.clipboard.writeText(fullTranscript)
     } catch (err) {
