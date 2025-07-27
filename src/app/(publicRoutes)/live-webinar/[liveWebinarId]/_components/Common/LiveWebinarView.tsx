@@ -8,7 +8,7 @@ import {
   useCallStateHooks,
   type Call,
 } from '@stream-io/video-react-sdk'
-import { Users, MessageSquare, Loader2 } from 'lucide-react'
+import { Users, MessageSquare, Loader2, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { CtaTypeEnum } from '@prisma/client'
 import { useEffect, useState } from 'react'
@@ -19,6 +19,7 @@ import { changeWebinarStatus } from '@/actions/webinar'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import ObsDialogBox from './ObsDialogBox'
+import { LiveTranscription } from '@/components/ui/LiveTranscription'
 
 type Props = {
   showChat: boolean
@@ -51,6 +52,7 @@ const LiveWebinarView = ({
   const [channel, setChannel] = useState<any>(null)
   const [dialogOpen, setDialogOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [showTranscription, setShowTranscription] = useState(false)
   const router = useRouter()
   const [obsDialogBox, setObsDialogBox] = useState(false)
 
@@ -177,6 +179,17 @@ const LiveWebinarView = ({
             <MessageSquare size={16} />
             <span>Chat</span>
           </button>
+          <button
+            onClick={() => setShowTranscription(!showTranscription)}
+            className={`px-3 py-1 rounded-full text-sm flex items-center space-x-1 ${
+              showTranscription
+                ? 'bg-accent-primary text-primary-foreground'
+                : 'bg-muted/50'
+            }`}
+          >
+            <FileText size={16} />
+            <span>Transcript</span>
+          </button>
         </div>
       </div>
 
@@ -282,6 +295,18 @@ const LiveWebinarView = ({
               </div>
             </Channel>
           </Chat>
+        )}
+
+        {/* Transcription panel */}
+        {showTranscription && (
+          <div className="w-80">
+            <LiveTranscription 
+              onTranscriptUpdate={(transcript) => {
+                // You can save transcript to database or share via chat here
+                console.log('Transcript updated:', transcript)
+              }}
+            />
+          </div>
         )}
       </div>
       {dialogOpen && (
