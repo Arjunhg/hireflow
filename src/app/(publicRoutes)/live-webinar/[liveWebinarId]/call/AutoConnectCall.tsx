@@ -9,6 +9,7 @@ import { CallStatusEnum } from '@prisma/client'
 import { Bot, Clock, Loader2, Mic, MicOff, PhoneOff } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
+import { LiveTranscription } from '@/components/ui/LiveTranscription'
 
 const CallStatus = {
   CONNECTING: 'CONNECTING',
@@ -434,6 +435,22 @@ const AutoConnectCall = ({
           </div>
         </div>
       </div>
+
+      {/* Floating Live Transcription Panel */}
+      {callStatus === CallStatus.ACTIVE && (
+        <div
+          className="fixed bottom-8 right-8 z-50 max-w-md w-full sm:w-96 shadow-2xl rounded-2xl bg-slate-900/80 border border-slate-700 backdrop-blur-lg animate-fade-in"
+          style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.18)' }}
+        >
+          <div className="max-h-[60vh] overflow-y-auto p-4">
+            <LiveTranscription
+              className="!bg-transparent !shadow-none !p-0"
+              showCloseButton={true}
+              onClose={() => {}}
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
