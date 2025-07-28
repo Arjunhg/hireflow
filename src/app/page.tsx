@@ -35,7 +35,7 @@ export default function Home() {
           <div className="p-2 rounded-xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-200/30 dark:border-emerald-700/30">
             <Briefcase className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
           </div>
-          <span className="text-xl font-bold text-slate-800 dark:text-emerald-100">WorkCast</span>
+          <span className="text-xl font-bold text-slate-800 dark:text-emerald-100">HireFlow</span>
         </div>
         <Link 
           href="/sign-in"

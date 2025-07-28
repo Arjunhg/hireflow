@@ -30,6 +30,7 @@ export function useSharedTranscription({
     clearSharedTranscripts
   } = useSharedTranscriptionStore()
 
+  // const localTranscriptionRef = useRef<any>(null)
 
   // Local transcription for host
   const {

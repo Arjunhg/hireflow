@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { useSharedTranscription } from '@/hooks/useSharedTranscription'
+// import { SharedTranscriptionResult } from '@/store/useSharedTranscriptionStore'
 import { Mic, MicOff, Download, Trash2, Copy, ChevronDown, ChevronUp, X, Users } from 'lucide-react'
 import { cn } from '@/lib/utils'
 

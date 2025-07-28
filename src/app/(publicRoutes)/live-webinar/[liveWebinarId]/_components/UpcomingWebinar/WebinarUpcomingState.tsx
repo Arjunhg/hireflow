@@ -85,7 +85,7 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
                     Starting...
                   </>
                 ) : (
-                  'Start Webinar'
+                  'Start Meeting'
                 )}
               </Button>
             ) : (

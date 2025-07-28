@@ -1,8 +1,8 @@
-# 🎯 AssemblyAI Hackathon Submission: WorkCasts Enhanced
+# 🎯 AssemblyAI Hackathon Submission: HireFlows Enhanced
 
 ## 🌟 What We Built
 
-WorkCasts is now powered by **AssemblyAI's cutting-edge speech-to-text technology**, transforming our webinar platform into an intelligent, accessible, and AI-enhanced experience.
+HireFlows is now powered by **AssemblyAI's cutting-edge speech-to-text technology**, transforming our webinar platform into an intelligent, accessible, and AI-enhanced experience.
 
 ### 🚀 Key Features Implemented
 
@@ -250,7 +250,7 @@ Run the demo and experience the future of intelligent webinars powered by Assemb
 
 ```bash
 git clone [your-repo]
-cd workcasts
+cd HireFlows
 npm install
 npm run dev
 # Open http://localhost:3000 and click "Transcript" in any webinar!

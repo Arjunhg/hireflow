@@ -23,7 +23,7 @@ const SuccessStep = ({ webinarLink, onCreateNew }: Props) => {
           <Check className="h-6 w-6 text-primary" />
         </div>
       </div>
-      <h2 className="text-2xl font-bold">Your webinar has been created</h2>
+      <h2 className="text-2xl font-bold">Your meeting has been created</h2>
       <p className="text-foreground">You can share the link with your viewers for them to join</p>
       <div className="flex mt-4 max-w-md mx-auto">
         <Input
@@ -62,7 +62,7 @@ const SuccessStep = ({ webinarLink, onCreateNew }: Props) => {
                 className="border-gray-700 text-white hover:bg-gray-800"
               >
                 <PlusCircle className="mr-2 h-4 w-4" />
-                Create Another Webinar
+                Create Another Meeting
               </Button>
           </div>
       )}

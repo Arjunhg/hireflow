@@ -57,7 +57,7 @@ export const createAssistant = async (name: string) => {
       transcriber: {
         provider: 'deepgram',
         model: 'nova-2',
-        keywords: ['WorkCast', 'technical', 'interview', 'hiring', 'collaboration']
+        keywords: ['HireFlow', 'technical', 'interview', 'hiring', 'collaboration']
       },
       endCallFunctionEnabled: true,
       endCallMessage: "Thank you for your time today. The interview has been completed successfully. You should hear back from our team within the next few business days. Have a great day!",
@@ -126,7 +126,7 @@ export const updateAssistant = async (
       transcriber: {
         provider: 'deepgram',
         model: 'nova-2',
-        keywords: ['WorkCast', 'technical', 'interview', 'hiring', 'collaboration']
+        keywords: ['HireFlow', 'technical', 'interview', 'hiring', 'collaboration']
       },
       endCallFunctionEnabled: true,
       endCallMessage: "Thank you for your time today. The interview has been completed successfully. You should hear back from our team within the next few business days. Have a great day!",

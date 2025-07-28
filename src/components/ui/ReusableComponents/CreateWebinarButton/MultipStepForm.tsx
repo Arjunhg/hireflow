@@ -61,7 +61,7 @@ const MultipStepForm = ({steps, onComplete}: Props) => {
             setSubmitting(true);
             const result = await createWebinar(formData);
             if(result.status === 200 && result.webinarId){
-                toast.success('Your webinar has been created successfully!');
+                toast.success('Your meeting has been created successfully!');
                 onComplete(result.webinarId);
             }else{
                 toast.error(result.message || 'Failed to create room.');

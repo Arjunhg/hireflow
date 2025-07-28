@@ -22,6 +22,7 @@ export function useAssemblyAITranscription(options: UseAssemblyAITranscriptionOp
   
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
+  // const audioChunksRef = useRef<Blob[]>([])
   
   // Use refs to track processing state and user intent
   const isProcessingRef = useRef(false)

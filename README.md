@@ -1,6 +1,6 @@
-# WorkCast - AI-Powered Hiring & Collaboration Platform
+# HireFlow - AI-Powered Hiring & Collaboration Platform
 
-WorkCast is a comprehensive platform that transforms how organizations hire, interview, and collaborate through AI-powered voice agents, live streaming, and intelligent candidate tracking. Built with Next.js 15, it combines real-time analytics with personalized hiring experiences to revolutionize workplace recruitment and team collaboration.
+HireFlow is a comprehensive platform that transforms how organizations hire, interview, and collaborate through AI-powered voice agents, live streaming, and intelligent candidate tracking. Built with Next.js 15, it combines real-time analytics with personalized hiring experiences to revolutionize workplace recruitment and team collaboration.
 
 ## Features
 
@@ -56,8 +56,8 @@ WorkCast is a comprehensive platform that transforms how organizations hire, int
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/Arjunhg/WorkCast.git
-cd WorkCast
+git clone https://github.com/Arjunhg/HireFlow.git
+cd HireFlow
 ```
 
 2. **Install dependencies**
@@ -112,12 +112,12 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ### Prerequisites
 - OBS Studio installed
-- Active virtual meeting session in WorkCast
+- Active virtual meeting session in HireFlow
 
 ### Configuration Steps
 
 1. **Get OBS Credentials**
-   - Start a virtual meeting in WorkCast
+   - Start a virtual meeting in HireFlow
    - Click "Get OBS Creds" button
    - Copy the RTMP URL and Stream Key
 
@@ -145,7 +145,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 5. **Start Streaming**
    - Click "Start Streaming" in OBS
-   - Your stream will appear in the WorkCast virtual meeting interface
+   - Your stream will appear in the HireFlow virtual meeting interface
 
 ## Usage
 

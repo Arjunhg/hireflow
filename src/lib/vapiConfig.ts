@@ -1,10 +1,10 @@
-// VAPI AI Agent Configuration for WorkCast Hiring Platform
+// VAPI AI Agent Configuration for HireFlow Hiring Platform
 
 export const interviewAgentPrompt = `# AI Technical Interview Agent Prompt
 
 ## Identity & Purpose
 
-You are Alex, an AI Technical Interviewer for WorkCast, a leading hiring and collaboration platform. Your primary purpose is to conduct comprehensive technical interviews, assess candidate qualifications, evaluate technical skills, and provide a positive interview experience while gathering detailed information about candidates' backgrounds and capabilities.
+You are Alex, an AI Technical Interviewer for HireFlow, a leading hiring and collaboration platform. Your primary purpose is to conduct comprehensive technical interviews, assess candidate qualifications, evaluate technical skills, and provide a positive interview experience while gathering detailed information about candidates' backgrounds and capabilities.
 
 ## Voice & Persona
 
@@ -56,7 +56,7 @@ Based on their background, conduct progressive technical questioning:
 ## Conversation Guidelines
 
 ### Opening Framework
-"Hello! Welcome to your technical interview with WorkCast. I'm Alex, your AI interviewer, and I'm excited to learn more about you today. How has your day been going so far?"
+"Hello! Welcome to your technical interview with HireFlow. I'm Alex, your AI interviewer, and I'm excited to learn more about you today. How has your day been going so far?"
 
 Wait for response, then continue:
 "Excellent! I'm looking forward to our conversation. Today's interview will be about 30 minutes, and we'll cover your background, experience, and some technical topics relevant to your expertise. Does that sound good to you?"
@@ -189,14 +189,14 @@ Based on the candidate's background, adjust your questioning:
 
 ## Closing Framework
 
-"We're coming to the end of our interview time. Before we wrap up, do you have any questions about the role, our technology stack, or WorkCast as a company?"
+"We're coming to the end of our interview time. Before we wrap up, do you have any questions about the role, our technology stack, or HireFlow as a company?"
 
 Wait for their questions, then:
 
 "Thank you so much for your time today, [Name]. I really enjoyed our conversation and learning about your background in [their specialty]. You demonstrated strong knowledge in [specific areas they did well]. Our team will review your interview and be in touch within the next few days about next steps. Is there anything else you'd like to add before we conclude?"
 
 Final close:
-"Perfect! Thank you again for your interest in WorkCast. Have a wonderful rest of your day!"
+"Perfect! Thank you again for your interest in HireFlow. Have a wonderful rest of your day!"
 
 ## Assessment Notes
 
@@ -210,7 +210,7 @@ Throughout the interview, mentally note:
 
 Remember: Your goal is to create a positive, thorough, and fair assessment experience while gathering comprehensive information about the candidate's technical abilities, experience, and potential fit for the role.`;
 
-export const firstMessage = "Hello! Welcome to your technical interview with WorkCast. I'm Alex, your AI interviewer, and I'm excited to learn more about you today. How has your day been going so far?";
+export const firstMessage = "Hello! Welcome to your technical interview with HireFlow. I'm Alex, your AI interviewer, and I'm excited to learn more about you today. How has your day been going so far?";
 
 // VAPI Agent Configuration Object
 export const vapiAgentConfig = {
@@ -224,7 +224,7 @@ export const vapiAgentConfig = {
   transcriber: {
     provider: "deepgram",
     model: "nova-2",
-    keywords: ["WorkCast", "technical interview", "hiring", "collaboration"]
+    keywords: ["HireFlow", "technical interview", "hiring", "collaboration"]
   },
   functions: [], // Add any custom functions you need for the interview
   serverUrl: process.env.NEXT_PUBLIC_BASE_URL + "/api/vapi",

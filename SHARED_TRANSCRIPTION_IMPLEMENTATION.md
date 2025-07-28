@@ -2,7 +2,7 @@
 
 ## 🎯 Overview
 
-This document explains the implementation of **shared live transcription** in the WorkCast webinar platform, where the host's speech is automatically transcribed and broadcast to all participants in real-time.
+This document explains the implementation of **shared live transcription** in the HireFlow webinar platform, where the host's speech is automatically transcribed and broadcast to all participants in real-time.
 
 ## 🏗️ Architecture Overview
 

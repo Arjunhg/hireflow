@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Quick start script for testing AssemblyAI integration
-echo "🚀 Starting WorkCasts with AssemblyAI Integration"
+echo "🚀 Starting HireFlows with AssemblyAI Integration"
 
 # Check if .env file exists
 if [ ! -f .env ]; then

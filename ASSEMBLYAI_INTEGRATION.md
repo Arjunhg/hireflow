@@ -1,31 +1,31 @@
 # AssemblyAI Integration Setup Guide
 
-This guide will help you integrate AssemblyAI's powerful speech-to-text capabilities into your WorkCasts webinar platform.
+This guide will help you integrate AssemblyAI's powerful speech-to-text capabilities into your HireFlows Meetingplatform.
 
 ## 🎯 Features Implemented
 
 ### 1. Real-time Live Transcription
 - **Live Audio Capture**: Captures microphone audio during webinars
 - **Real-time Processing**: Streams audio to AssemblyAI for instant transcription
-- **Live Display**: Shows transcriptions in real-time in the webinar interface
+- **Live Display**: Shows transcriptions in real-time in the Meetinginterface
 - **Partial Results**: Displays partial transcripts while processing for immediate feedback
 
-### 2. Post-Webinar Analysis
-- **Audio File Transcription**: Process recorded webinar audio files
+### 2. Post-MeetingAnalysis
+- **Audio File Transcription**: Process recorded Meetingaudio files
 - **Sentiment Analysis**: Understand the emotional tone of conversations
 - **Key Points Extraction**: Automatically identify important discussion points
 - **Topic Detection**: Categorize discussions by relevant business topics
-- **Meeting Summaries**: Generate concise summaries of webinar content
+- **Meeting Summaries**: Generate concise summaries of Meetingcontent
 
 ### 3. User Interface Components
-- **LiveTranscription Component**: Toggle-able panel in webinar interface
+- **LiveTranscription Component**: Toggle-able panel in Meetinginterface
 - **Download Transcripts**: Export transcriptions as text files
 - **Copy to Clipboard**: Easy sharing of transcript content
 - **Auto-save**: Preserves transcripts when recording stops
 
 ### 4. AI Agent Enhancement
 - **Context Awareness**: VAPI AI agents can access real-time transcripts
-- **Better Responses**: AI agents provide more relevant answers based on webinar content
+- **Better Responses**: AI agents provide more relevant answers based on Meetingcontent
 - **Follow-up Questions**: Intelligent questioning based on discussed topics
 
 ## 🚀 Quick Setup
@@ -52,21 +52,21 @@ The live transcription feature requires microphone access. Users will be prompte
 
 ## 📱 How to Use
 
-### For Webinar Hosts:
-1. **Start Webinar**: Begin your webinar as usual
-2. **Enable Transcription**: Click the "Transcript" button in the webinar header
+### For MeetingHosts:
+1. **Start Webinar**: Begin your Meetingas usual
+2. **Enable Transcription**: Click the "Transcript" button in the Meetingheader
 3. **Start Recording**: Click "Start Recording" in the transcription panel
 4. **Monitor Live**: Watch real-time transcriptions appear
 5. **Download Results**: Export transcripts when finished
 
-### For Webinar Attendees:
+### For MeetingAttendees:
 1. **View Transcripts**: Click "Transcript" to see live transcriptions (if enabled by host)
 2. **Follow Along**: Use transcripts to better understand the presentation
 3. **Copy Content**: Copy important parts for later reference
 
 ### For AI Agent Integration:
 1. **Automatic Context**: AI agents automatically receive transcript context
-2. **Improved Responses**: More relevant answers based on webinar content
+2. **Improved Responses**: More relevant answers based on Meetingcontent
 3. **Better Follow-ups**: Intelligent questions about discussed topics
 
 ## 🛠️ Technical Implementation
@@ -93,7 +93,7 @@ The live transcription feature requires microphone access. Users will be prompte
 
 ### Integration Points:
 
-#### Webinar Interface (`LiveWebinarView.tsx`)
+#### MeetingInterface (`LiveWebinarView.tsx`)
 - Added transcription toggle button
 - Integrated transcription panel alongside chat
 - Maintains responsive design with existing components
@@ -111,7 +111,7 @@ model WebinarTranscript {
   sentiment   String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  webinar     Webinar  @relation(fields: [webinarId], references: [id])
+  Meeting    Meeting @relation(fields: [webinarId], references: [id])
 }
 ```
 
@@ -142,7 +142,7 @@ Customize the transcription panel appearance:
 Enhance AI responses with transcript context:
 ```typescript
 // In VAPI configuration
-const contextMessage = `Based on the webinar transcript: ${transcriptContent}`
+const contextMessage = `Based on the Meetingtranscript: ${transcriptContent}`
 ```
 
 ## 📊 Analytics & Insights
@@ -156,7 +156,7 @@ const contextMessage = `Based on the webinar transcript: ${transcriptContent}`
 ### Export Options:
 - **Text Files**: Plain text transcripts
 - **JSON Data**: Structured data with timestamps and metadata
-- **Summary Reports**: AI-generated meeting summaries
+- **Summary Reports**: AI-generated Meeting summaries
 - **Analytics Dashboard**: Visual insights (future enhancement)
 
 ## 🚨 Troubleshooting
@@ -216,7 +216,7 @@ const contextMessage = `Based on the webinar transcript: ${transcriptContent}`
 
 ### API Integrations:
 - **Slack**: Share transcripts in team channels
-- **Notion**: Auto-create meeting notes
+- **Notion**: Auto-create Meeting notes
 - **Google Drive**: Save transcripts to cloud storage
 - **Email**: Send summary reports to attendees
 

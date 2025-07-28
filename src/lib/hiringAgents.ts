@@ -36,7 +36,7 @@ export const createHiringAgent = async (config: HiringAgentConfig) => {
     // Customize the first message
     let customFirstMessage = firstMessage
     if (config.role) {
-      customFirstMessage = `Hello! Welcome to your ${config.role} interview with WorkCast. I'm Alex, your AI interviewer, and I'm excited to learn more about you today. How has your day been going so far?`
+      customFirstMessage = `Hello! Welcome to your ${config.role} interview with HireFlow. I'm Alex, your AI interviewer, and I'm excited to learn more about you today. How has your day been going so far?`
     }
 
     const assistant = await vapiServer.assistants.create({
@@ -60,7 +60,7 @@ export const createHiringAgent = async (config: HiringAgentConfig) => {
       transcriber: {
         provider: 'deepgram',
         model: 'nova-2',
-        keywords: ['WorkCast', 'technical', 'interview', 'hiring', 'collaboration', config.role?.toLowerCase() || '']
+        keywords: ['HireFlow', 'technical', 'interview', 'hiring', 'collaboration', config.role?.toLowerCase() || '']
       },
       endCallFunctionEnabled: true,
       endCallMessage: `Thank you for your time today. Your ${config.role || 'technical'} interview has been completed successfully. You should hear back from our team within the next few business days. Have a great day!`,

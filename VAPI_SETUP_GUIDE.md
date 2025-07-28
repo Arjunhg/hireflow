@@ -1,19 +1,19 @@
-# WorkCast VAPI Hiring Agent Setup Guide
+# HireFlow VAPI Hiring Agent Setup Guide
 
 ## Overview
 
-I've created a comprehensive VAPI agent configuration specifically designed for technical interviews in your WorkCast hiring platform. The agent "Alex" is now optimized for conducting professional, structured interviews that assess both technical skills and cultural fit.
+I've created a comprehensive VAPI agent configuration specifically designed for technical interviews in your HireFlow hiring platform. The agent "Alex" is now optimized for conducting professional, structured interviews that assess both technical skills and cultural fit.
 
 ## What's Changed
 
 ### 1. New Agent Persona: Alex
-- **Role**: AI Technical Interviewer for WorkCast
+- **Role**: AI Technical Interviewer for HireFlow
 - **Personality**: Professional, friendly, encouraging, and technically competent
 - **Voice**: Changed from "Cole" to "Alex" for better interviewer identity
 
 ### 2. Updated First Message
 ```
-"Hello! Welcome to your technical interview with WorkCast. I'm Alex, your AI interviewer, and I'm excited to learn more about you today. How has your day been going so far?"
+"Hello! Welcome to your technical interview with HireFlow. I'm Alex, your AI interviewer, and I'm excited to learn more about you today. How has your day been going so far?"
 ```
 
 ### 3. Comprehensive Interview Structure
@@ -67,7 +67,7 @@ I've created a comprehensive VAPI agent configuration specifically designed for 
 ```typescript
 import { createAssistant } from '@/actions/vapi'
 
-const result = await createAssistant("WorkCast Technical Interviewer")
+const result = await createAssistant("HireFlow Technical Interviewer")
 ```
 
 2. **Create Role-Specific Interviewers**:
@@ -142,7 +142,7 @@ NEXT_PUBLIC_VAPI_API_KEY=your_public_api_key
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 ```
 
-## Integration with Your WorkCast Platform
+## Integration with Your HireFlow Platform
 
 ### 1. UI Integration
 - Add role selection dropdown in interview scheduling
