@@ -91,6 +91,8 @@ VAPI_PRIVATE_KEY=your_vapi_private_key
 VAPI_ORG_ID=your_vapi_org_id
 NEXT_PUBLIC_VAPI_API_KEY=your_vapi_api_key
 
+NEXT_PUBLIC_ASSEMBLYAI_API_KEY=your_assemblyai_api_key
+
 # Database
 DATABASE_URL=your_postgresql_connection_string
 ```
