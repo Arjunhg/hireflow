@@ -23,7 +23,7 @@ interface SharedTranscriptionState {
   reset: () => void
 }
 
-export const useSharedTranscriptionStore = create<SharedTranscriptionState>((set, get) => ({
+export const useSharedTranscriptionStore = create<SharedTranscriptionState>((set) => ({
   // Initial state
   sharedTranscripts: [],
   isHostTranscribing: false,

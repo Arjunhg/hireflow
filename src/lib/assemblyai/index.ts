@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AssemblyAI } from 'assemblyai'
 
 export interface TranscriptTurn {
@@ -49,8 +50,7 @@ export class AssemblyAIService {
     try {
       this.transcriber = this.client.streaming.transcriber({
         sampleRate: 16_000,
-        formatTurns: options?.formatTurns ?? true,
-        speakerLabels: options?.speakerLabels ?? true
+        formatTurns: options?.formatTurns ?? true
       })
 
       this.transcriber.on('open', ({ id }: { id: string }) => {
@@ -135,8 +135,8 @@ export class AssemblyAIService {
       const params = {
         audio: transcript,
         summarization: true,
-        summary_model: 'informative',
-        summary_type: 'bullets',
+        summary_model: 'informative' as const,
+        summary_type: 'bullets' as const,
         iab_categories: true,
         auto_highlights: true,
         sentiment_analysis: true
@@ -146,9 +146,9 @@ export class AssemblyAIService {
       
       return {
         summary: result.summary || 'No summary available',
-        keyPoints: result.auto_highlights?.results?.map(h => h.text) || [],
+        keyPoints: result.auto_highlights_result?.results?.map((h: any) => h.text) || [],
         actionItems: this.extractActionItems(result.summary || ''),
-        topics: result.iab_categories?.results?.map(c => c.text) || [],
+        topics: result.iab_categories_result?.results?.map((c: any) => c.text) || [],
         sentiment: this.determineSentiment(result.sentiment_analysis_results || [])
       }
     } catch (error) {

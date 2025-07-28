@@ -8,7 +8,7 @@ export async function GET() {
       expires_in_seconds: 60, // 1 minute, adjust as needed
     });
     return NextResponse.json({ token });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json({ err }, { status: 500 });
   }
 } 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AssemblyAI } from 'assemblyai'
 
 export interface TranscriptionOptions {
@@ -26,44 +27,10 @@ export class AssemblyAIService {
   // Start real-time transcription streaming
   async startStreaming() {
     try {
-      // Fetch temporary token from Next.js API route
-      const res = await fetch('/api/assemblyai-token');
-      if (!res.ok) {
-        throw new Error('Failed to fetch AssemblyAI token');
-      }
-      const { token } = await res.json();
-      if (!token) {
-        throw new Error('No AssemblyAI token received');
-      }
-
-      // Use the token to create the transcriber
-      const { StreamingTranscriber } = await import('assemblyai');
-      this.transcriber = new StreamingTranscriber({
-        token,
+      this.transcriber = this.client.streaming.transcriber({
         sampleRate: 16_000
-      });
-
-      // Add event listeners for connection state
-      this.transcriber.on('open', (info: any) => {
-        console.log('AssemblyAI WebSocket connection opened', info)
-      })
-      this.transcriber.on('close', (code: number, reason: string) => {
-        console.log('AssemblyAI WebSocket connection closed', code, reason)
-      })
-      this.transcriber.on('error', (err: Error) => {
-        console.error('AssemblyAI WebSocket error:', err)
       })
 
-      // Add event listeners for transcription results
-      this.transcriber.on('turn', (turn: any) => {
-        console.log('AssemblyAI turn event:', turn);
-      });
-      this.transcriber.on('transcript', (transcript: any) => {
-        console.log('AssemblyAI transcript event:', transcript);
-      });
-
-      // Await connection before returning
-      await this.transcriber.connect()
       return this.transcriber
     } catch (error) {
       console.error('Error starting streaming transcription:', error)

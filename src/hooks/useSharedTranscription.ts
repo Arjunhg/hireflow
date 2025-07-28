@@ -1,4 +1,5 @@
-import { useEffect, useCallback, useRef } from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useCallback } from 'react'
 import { useSharedTranscriptionStore, SharedTranscriptionResult } from '@/store/useSharedTranscriptionStore'
 import { useAssemblyAITranscription } from './useAssemblyAITranscription'
 
@@ -29,7 +30,6 @@ export function useSharedTranscription({
     clearSharedTranscripts
   } = useSharedTranscriptionStore()
 
-  const localTranscriptionRef = useRef<any>(null)
 
   // Local transcription for host
   const {

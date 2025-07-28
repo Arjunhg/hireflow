@@ -1,3 +1,5 @@
+'use client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react'
 import { assemblyAIService } from '@/lib/assemblyai/service'
 
@@ -6,6 +8,12 @@ export default function AssemblyAITest() {
   const [transcripts, setTranscripts] = useState<string[]>([])
   const [isRecording, setIsRecording] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [isClient, setIsClient] = useState(false)
+
+  // Ensure we're on the client side before accessing browser APIs
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const testAssemblyAI = async () => {
     try {
@@ -105,20 +113,24 @@ export default function AssemblyAITest() {
 
         <div className="p-4 border rounded-lg">
           <h2 className="font-semibold mb-2">Environment Check:</h2>
-          <ul className="text-sm space-y-1">
-            <li>API Key: {process.env.NEXT_PUBLIC_ASSEMBLYAI_API_KEY ? '✅ Present' : '❌ Missing'}</li>
-            <li>MediaDevices: {navigator.mediaDevices ? '✅ Supported' : '❌ Not supported'}</li>
-            <li>MediaRecorder: {window.MediaRecorder ? '✅ Supported' : '❌ Not supported'}</li>
-            <li>HTTPS: {location.protocol === 'https:' || location.hostname === 'localhost' ? '✅ Secure context' : '❌ Insecure context'}</li>
-          </ul>
+          {isClient ? (
+            <ul className="text-sm space-y-1">
+              <li>API Key: {process.env.NEXT_PUBLIC_ASSEMBLYAI_API_KEY ? '✅ Present' : '❌ Missing'}</li>
+              <li>MediaDevices: {navigator.mediaDevices ? '✅ Supported' : '❌ Not supported'}</li>
+              <li>MediaRecorder: {window.MediaRecorder ? '✅ Supported' : '❌ Not supported'}</li>
+              <li>HTTPS: {location.protocol === 'https:' || location.hostname === 'localhost' ? '✅ Secure context' : '❌ Insecure context'}</li>
+            </ul>
+          ) : (
+            <p className="text-gray-500">Loading environment checks...</p>
+          )}
         </div>
 
         <button
           onClick={testAssemblyAI}
-          disabled={isRecording}
+          disabled={isRecording || !isClient}
           className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
         >
-          {isRecording ? 'Recording... (30s test)' : 'Start AssemblyAI Test'}
+          {!isClient ? 'Loading...' : isRecording ? 'Recording... (30s test)' : 'Start AssemblyAI Test'}
         </button>
 
         {transcripts.length > 0 && (
