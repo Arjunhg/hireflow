@@ -171,12 +171,3 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 2. Monitor candidates as they move through hiring stages
 3. Use tags to categorize and segment candidates
 4. Analyze hiring success rates and optimize interview strategies
-
-
-## Live Demo
-
-Visit [work-cast.vercel.app](https://work-cast.vercel.app) to see the platform in action.
-
----
-
-Built with ❤️ by [Arjun Sharma](https://github.com/Arjunhg) and [Anushka Chaudhary](https://github.com/Anu19-10)
