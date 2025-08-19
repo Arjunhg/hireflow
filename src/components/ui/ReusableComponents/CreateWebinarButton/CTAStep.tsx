@@ -113,13 +113,13 @@ const CTAStep = ({ assistants }: Props) => {
             >
               Book a Call
             </TabsTrigger>
-            <TabsTrigger
+            {/* <TabsTrigger
               value={CtaTypeEnum.BUY_NOW}
               className="w-1/2"
               onClick={() => handleSelectCTAType(CtaTypeEnum.BUY_NOW)}
             >
               Buy Now
-            </TabsTrigger>
+            </TabsTrigger> */}
           </TabsList>
         </Tabs>
       </div>

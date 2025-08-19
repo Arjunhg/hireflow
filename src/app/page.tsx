@@ -84,15 +84,15 @@ export default function Home() {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12">
           <div className="text-center space-y-2 p-6 rounded-2xl bg-emerald-50/50 dark:bg-emerald-900/20 border border-emerald-200/30 dark:border-emerald-700/30 backdrop-blur-sm">
-            <div className="text-3xl font-bold text-slate-800 dark:text-emerald-100">15K+</div>
+            <div className="text-3xl font-bold text-slate-800 dark:text-emerald-100">---</div>
             <div className="text-slate-600 dark:text-emerald-300">Active Candidates</div>
           </div>
           <div className="text-center space-y-2 p-6 rounded-2xl bg-teal-50/50 dark:bg-teal-900/20 border border-teal-200/30 dark:border-teal-700/30 backdrop-blur-sm">
-            <div className="text-3xl font-bold text-slate-800 dark:text-teal-100">98%</div>
+            <div className="text-3xl font-bold text-slate-800 dark:text-teal-100">---</div>
             <div className="text-slate-600 dark:text-teal-300">Interview Success Rate</div>
           </div>
           <div className="text-center space-y-2 p-6 rounded-2xl bg-emerald-50/50 dark:bg-emerald-900/20 border border-emerald-200/30 dark:border-emerald-700/30 backdrop-blur-sm">
-            <div className="text-3xl font-bold text-slate-800 dark:text-emerald-100">2.4K</div>
+            <div className="text-3xl font-bold text-slate-800 dark:text-emerald-100">---</div>
             <div className="text-slate-600 dark:text-emerald-300">Successful Hires</div>
           </div>
         </div>
